@@ -2219,5 +2219,20 @@ input, textarea, select {
 
 ::selection { background: rgba(239, 159, 118, 0.3) !important; color: #c6d0f5 !important; }
 
+/* Stickers / photos are transparent PNGs with no bubble. The original's
+   transparent rules carry no mappable color so the generator never emits
+   them, and our generated !important bubble backgrounds would win —
+   restate them here at equal-or-higher specificity. */
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.my .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent .msg .msgContentPane,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent.my .msg .msgContentPane,
+.stickerChatMsgContent, .stickerChatMsgContent .chatMsgContent,
+.photoChatMsgContent, .photoChatMsgContent .chatMsgContent,
+.broadcastChatMsgContent, .broadcastChatMsgContent .chatMsgContent {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
 /* server-rendered watermark is designed for a white page — dim it on dark */
 #watermarkImage { opacity: 0.22 !important; }

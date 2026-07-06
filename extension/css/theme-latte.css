@@ -2218,3 +2218,18 @@ input, textarea, select {
 ::placeholder { color: #9ca0b0 !important; }
 
 ::selection { background: rgba(254, 100, 11, 0.3) !important; color: #4c4f69 !important; }
+
+/* Stickers / photos are transparent PNGs with no bubble. The original's
+   transparent rules carry no mappable color so the generator never emits
+   them, and our generated !important bubble backgrounds would win —
+   restate them here at equal-or-higher specificity. */
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.my .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent .msg .msgContentPane,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent.my .msg .msgContentPane,
+.stickerChatMsgContent, .stickerChatMsgContent .chatMsgContent,
+.photoChatMsgContent, .photoChatMsgContent .chatMsgContent,
+.broadcastChatMsgContent, .broadcastChatMsgContent .chatMsgContent {
+  background-color: transparent !important;
+  background-image: none !important;
+}

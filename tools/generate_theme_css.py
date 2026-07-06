@@ -167,6 +167,21 @@ input, textarea, select {{
 ::placeholder {{ color: {overlay0} !important; }}
 
 ::selection {{ background: {selection} !important; color: {text} !important; }}
+
+/* Stickers / photos are transparent PNGs with no bubble. The original's
+   transparent rules carry no mappable color so the generator never emits
+   them, and our generated !important bubble backgrounds would win —
+   restate them here at equal-or-higher specificity. */
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.my .msg .msgContentPane.transparent,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent .msg .msgContentPane,
+.chatRoomMainPane .chatRoomMessageMain .messageListMainPane .messageSection.stickerChatMsgContent.my .msg .msgContentPane,
+.stickerChatMsgContent, .stickerChatMsgContent .chatMsgContent,
+.photoChatMsgContent, .photoChatMsgContent .chatMsgContent,
+.broadcastChatMsgContent, .broadcastChatMsgContent .chatMsgContent {{
+  background-color: transparent !important;
+  background-image: none !important;
+}}
 {watermark}"""
 
 WATERMARK_DIM = """
@@ -351,7 +366,7 @@ def generate(flavor, css_all, root_vars, out_path):
 
 def main():
     *css_files, out_dir = sys.argv[1:]
-    css_all = "".join(Path(f).read_text() for f in css_files)
+    css_all = "".join(Path(f).read_text(encoding="utf-8-sig") for f in css_files)
     root_vars = collect_root_vars(css_all)
     for flavor in PALETTES:
         generate(flavor, css_all, root_vars, Path(out_dir) / f"theme-{flavor}.css")
