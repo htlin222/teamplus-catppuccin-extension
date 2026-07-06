@@ -1,11 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin for Team+",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Soothing Catppuccin themes for Team+ (team.kfsyscc.org) — Latte, Frappé, Macchiato & Mocha flavors",
   "homepage_url": "https://github.com/htlin222/catppuccin-teamplus",
-  "permissions": ["storage"],
-  "host_permissions": ["https://team.kfsyscc.org/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://team.kfsyscc.org/*"
+  ],
   "action": {
     "default_title": "Catppuccin for Team+",
     "default_popup": "popup.html",
@@ -24,16 +28,24 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://team.kfsyscc.org/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://team.kfsyscc.org/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["css/theme-*.css"],
-      "matches": ["https://team.kfsyscc.org/*"]
+      "resources": [
+        "css/theme-*.css"
+      ],
+      "matches": [
+        "https://team.kfsyscc.org/*"
+      ]
     }
   ],
   "icons": {
