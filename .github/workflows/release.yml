@@ -1,0 +1,72 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # skip the version-bump commit this workflow itself pushes
+    if: "!startsWith(github.event.head_commit.message, 'chore(release)')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bump patch version
+        id: bump
+        run: |
+          V=$(jq -r .version extension/manifest.json)
+          IFS=. read -r MA MI PA <<< "$V"
+          NEW="$MA.$MI.$((PA+1))"
+          jq --arg v "$NEW" '.version=$v' extension/manifest.json > tmp.json
+          mv tmp.json extension/manifest.json
+          echo "version=$NEW" >> "$GITHUB_OUTPUT"
+
+      - name: Commit bump and tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add extension/manifest.json
+          git commit -m "chore(release): v${{ steps.bump.outputs.version }}"
+          git tag "v${{ steps.bump.outputs.version }}"
+          git push origin main --tags
+
+      - name: Build zip
+        run: |
+          (cd extension && zip -qr "../catppuccin-teamplus-v${{ steps.bump.outputs.version }}.zip" .)
+
+      - name: Build crx
+        env:
+          CRX_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+        run: |
+          printf '%s' "$CRX_KEY" > key.pem
+          npx --yes crx3 extension \
+            -p key.pem \
+            -o "catppuccin-teamplus-v${{ steps.bump.outputs.version }}.crx"
+          rm -f key.pem
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.bump.outputs.version }}
+          name: "Catppuccin for Team+ v${{ steps.bump.outputs.version }}"
+          body: |
+            🐱 **Catppuccin for Team+** — soothing pastel themes for the Team+ messenger
+            (team.kfsyscc.org), in all four [Catppuccin](https://catppuccin.com/palette/) flavors:
+            ☀️ Latte · 🪴 Frappé · 🌺 Macchiato · 🌿 Mocha
+
+            **Install (zip, recommended)**
+            1. Download and unzip `catppuccin-teamplus-v${{ steps.bump.outputs.version }}.zip`
+            2. Open `chrome://extensions`, enable *Developer mode*
+            3. *Load unpacked* → select the unzipped folder
+
+            The `.crx` package is provided for enterprise/policy installs; recent Chrome
+            versions block drag-and-drop `.crx` installs outside the Web Store.
+
+            Pick your flavor from the toolbar popup — switching is instant, no reload needed.
+          files: |
+            catppuccin-teamplus-v${{ steps.bump.outputs.version }}.zip
+            catppuccin-teamplus-v${{ steps.bump.outputs.version }}.crx

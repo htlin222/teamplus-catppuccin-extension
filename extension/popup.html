@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>Catppuccin for Team+</title>
+<style>
+  :root {
+    --base: #1e1e2e; --mantle: #181825; --surface0: #313244;
+    --surface1: #45475a; --text: #cdd6f4; --subtext0: #a6adc8;
+    --overlay0: #6c7086; --peach: #fab387; --crust: #11111b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 300px;
+    background: var(--base);
+    color: var(--text);
+    font-family: "SF Pro TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    font-size: 14px;
+    padding: 16px;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  h1 { font-size: 15px; font-weight: 700; }
+  h1 span { color: var(--peach); }
+  .switch {
+    position: relative;
+    width: 40px; height: 22px;
+    background: var(--surface1);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background .15s;
+    border: none;
+  }
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--text);
+    transition: transform .15s;
+  }
+  .switch[aria-checked="true"] { background: var(--peach); }
+  .switch[aria-checked="true"]::after { transform: translateX(18px); background: var(--crust); }
+  .flavors { display: grid; gap: 8px; }
+  .flavor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--mantle);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    width: 100%;
+    transition: border-color .15s, opacity .15s;
+  }
+  .flavor:hover { border-color: var(--surface1); }
+  .flavor[aria-pressed="true"] { border-color: var(--peach); }
+  .flavor .dots { display: flex; gap: 3px; flex-shrink: 0; }
+  .flavor .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .flavor .name { font-weight: 600; }
+  .flavor .desc { font-size: 11px; color: var(--subtext0); }
+  body.disabled .flavors { opacity: .4; pointer-events: none; }
+  footer {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--surface0);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  footer a { color: var(--subtext0); text-decoration: none; }
+  footer a:hover { color: var(--peach); }
+</style>
+</head>
+<body>
+  <header>
+    <h1><span>Catppuccin</span> for Team+</h1>
+    <button id="toggle" class="switch" role="switch" aria-checked="true" title="啟用／停用主題"></button>
+  </header>
+
+  <div class="flavors" id="flavors">
+    <button class="flavor" data-flavor="latte" aria-pressed="false">
+      <span class="dots">
+        <span class="dot" style="background:#eff1f5"></span>
+        <span class="dot" style="background:#fe640b"></span>
+        <span class="dot" style="background:#d20f39"></span>
+        <span class="dot" style="background:#40a02b"></span>
+        <span class="dot" style="background:#1e66f5"></span>
+      </span>
+      <span><span class="name">Latte</span><br><span class="desc">最明亮 — 深色主題的和諧反轉</span></span>
+    </button>
+    <button class="flavor" data-flavor="frappe" aria-pressed="false">
+      <span class="dots">
+        <span class="dot" style="background:#303446"></span>
+        <span class="dot" style="background:#ef9f76"></span>
+        <span class="dot" style="background:#e78284"></span>
+        <span class="dot" style="background:#a6d189"></span>
+        <span class="dot" style="background:#8caaee"></span>
+      </span>
+      <span><span class="name">Frappé</span><br><span class="desc">低飽和的沉靜美學</span></span>
+    </button>
+    <button class="flavor" data-flavor="macchiato" aria-pressed="false">
+      <span class="dots">
+        <span class="dot" style="background:#24273a"></span>
+        <span class="dot" style="background:#f5a97f"></span>
+        <span class="dot" style="background:#ed8796"></span>
+        <span class="dot" style="background:#a6da95"></span>
+        <span class="dot" style="background:#8aadf4"></span>
+      </span>
+      <span><span class="name">Macchiato</span><br><span class="desc">中等對比的柔和氛圍</span></span>
+    </button>
+    <button class="flavor" data-flavor="mocha" aria-pressed="false">
+      <span class="dots">
+        <span class="dot" style="background:#1e1e2e"></span>
+        <span class="dot" style="background:#fab387"></span>
+        <span class="dot" style="background:#f38ba8"></span>
+        <span class="dot" style="background:#a6e3a1"></span>
+        <span class="dot" style="background:#89b4fa"></span>
+      </span>
+      <span><span class="name">Mocha</span><br><span class="desc">The Original — 最深邃的經典</span></span>
+    </button>
+  </div>
+
+  <footer>
+    <a href="https://catppuccin.com/palette/" target="_blank" rel="noopener">Catppuccin 調色盤 ↗</a>
+    <a href="https://github.com/htlin222/catppuccin-teamplus" target="_blank" rel="noopener">GitHub ↗</a>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
