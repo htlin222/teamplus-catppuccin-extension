@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Catppuccin for Team+",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Soothing Catppuccin themes for Team+ (team.kfsyscc.org) — Latte, Frappé, Macchiato & Mocha flavors",
   "homepage_url": "https://github.com/htlin222/catppuccin-teamplus",
   "permissions": [
