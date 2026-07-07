@@ -23,21 +23,12 @@ needed.
 
 ## 🍨 Flavors
 
-| Flavor | Vibe | Preview |
-| --- | --- | --- |
-| ☀️ **Latte** | Our lightest theme harmoniously inverting the essence of Catppuccin's dark themes | ![Latte](docs/latte.png) |
-| 🪴 **Frappé** | A less vibrant alternative using subdued colors for a muted aesthetic | ![Frappé](docs/frappe.png) |
-| 🌺 **Macchiato** | Medium contrast with gentle colors creating a soothing atmosphere | ![Macchiato](docs/macchiato.png) |
-| 🌿 **Mocha** | The Original — our darkest variant offering a cozy feeling with color-rich accents | ![Mocha](docs/mocha.png) |
-
-<details>
-<summary>More screenshots (Mocha)</summary>
-
-| Original light theme | Personal wall (Mocha) | Team wall (Mocha) |
-| --- | --- | --- |
-| ![original](docs/original.png) | ![wall](docs/mocha-wall.png) | ![team](docs/mocha-team.png) |
-
-</details>
+| Flavor | Vibe |
+| --- | --- |
+| ☀️ **Latte** | Our lightest theme harmoniously inverting the essence of Catppuccin's dark themes |
+| 🪴 **Frappé** | A less vibrant alternative using subdued colors for a muted aesthetic |
+| 🌺 **Macchiato** | Medium contrast with gentle colors creating a soothing atmosphere |
+| 🌿 **Mocha** | The Original — our darkest variant offering a cozy feeling with color-rich accents |
 
 ## ✨ Features
 
